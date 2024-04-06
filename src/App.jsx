@@ -1,70 +1,52 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Routes, Route } from "react-router-dom";
+
+import { HomePage } from "./pages/HomePage";
+import { MovieDetailsPage } from "./pages/MovieDetailsPage";
+import { MoviesPage } from "./pages/MoviesPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+
 import clsx from "clsx";
 import css from "./App.module.css";
 
+const getActiveClassName = ({ isActive }) =>
+  clsx(css.navLink, {
+    [css.active]: isActive,
+  });
 function App() {
   return (
-    <header>
-      <nav className={css.nav}>
-        <NavLink
-          className={({ isActive }) =>
-            clsx(css.navLink, {
-              [css.active]: isActive,
-            })
-          }
-          to='/'
-        >
-          Home
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            clsx(css.navLink, {
-              [css.active]: isActive,
-            })
-          }
-          to='/details'
-        >
-          Movie Details
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            clsx(css.navLink, {
-              [css.active]: isActive,
-            })
-          }
-          to='/movies'
-        >
-          Movies
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            clsx(css.navLink, {
-              [css.active]: isActive,
-            })
-          }
-          to='/*'
-        >
-          Not Found
-        </NavLink>
-      </nav>
-    </header>
+    <div>
+      <header>
+        <nav className={css.nav}>
+          <NavLink className={getActiveClassName} to='/'>
+            Home
+          </NavLink>
+          {/* <NavLink className={getActiveClassName} to='/details'>
+            Movie Details
+          </NavLink> */}
+          <NavLink className={getActiveClassName} to='/movies'>
+            Movies
+          </NavLink>
+          <NavLink className={getActiveClassName} to='/*'>
+            Not Found
+          </NavLink>
+        </nav>
+      </header>
+      <main>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/movies' element={<MoviesPage />} />
+          <Route path='/movies/:movieId' element={<MovieDetailsPage />} />
+          <Route path='/*' element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
 export default App;
 
-// import { NavLink, Routes, Route } from "react-router-dom";
+//
 // import { useState } from "react";
 
-// import HomePage from "path/to/pages/HomePage";
-// import MovieDetailsPage from "path/to/pages/MovieDetailsPage";
-// import MoviesPage from "path/to/pages/MoviesPage";
-// import NotFoundPage from "path/to/pages/NotFoundPage";
-
-// <Routes>
-//   <Route path='/' element={<HomePage />} />
-//   <Route path='/details' element={<MovieDetailsPage />} />
-//   <Route path='/movies' element={<MoviesPage />} />
-//   <Route path='/*' element={<NotFoundPage />} />
-// </Routes>
+//
 //57min
