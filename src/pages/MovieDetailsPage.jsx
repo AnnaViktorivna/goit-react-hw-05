@@ -1,17 +1,39 @@
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import MovieCast from "../components/MovieCast/MovieCast";
 import { MovieReviews } from "../components/MovieReviews/MovieReviews";
+import { getMovieById } from "../servises/api";
 
 export const MovieDetailsPage = () => {
+  const { id } = useParams();
+  const [movieDetail, setMovieDetail] = useState([]);
+
+  useEffect(() => {
+    async function getMovieDetails() {
+      try {
+        const response = await getMovieById(id);
+        setMovieDetail(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMovieDetails();
+  }, [id]);
+
   return (
     <div>
-      <h1>Movie Details</h1>
-      <img src='' alt='' />
-      <h2>title</h2>
-      <p>User Score:</p>
+      <h1>Movie Details:{id}</h1>
+      <img
+        src='https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg
+'
+        alt=''
+      />
+      <h2>{movieDetail.title}</h2>
+      <p>User Score:{movieDetail.vote_average}</p>
       <h3>Owerview</h3>
-      <p>OwerviewDescription</p>
+      <p>{movieDetail.overview}</p>
       <h3>Genres</h3>
-      <p>GenresDescription</p>
+      <p>{movieDetail.genres}</p>
       <h3>Additional information</h3>
       <MovieCast />
       <MovieReviews />

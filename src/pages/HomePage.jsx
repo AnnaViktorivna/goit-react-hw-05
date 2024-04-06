@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getApi } from "../servises/api";
+
+import { Link } from "react-router-dom";
 export const HomePage = () => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function getMovies() {
-      const response = await getApi();
-      setMovies(response.data.results);
+      try {
+        const response = await getApi();
+        setMovies(response.data.results);
+      } catch (error) {
+        console.log(error);
+      }
     }
     getMovies();
   }, []);
@@ -19,7 +25,9 @@ export const HomePage = () => {
         {movies.map((movie) => {
           return (
             <li key={movie.id}>
-              <h3>{movie.title}</h3>
+              <Link to={`/movies/${movie.id}`}>
+                <h3>{movie.title}</h3>
+              </Link>
               <h4>Description: </h4>
               <p>{movie.overview}</p>
               <h4>Popularity: </h4>

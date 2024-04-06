@@ -11,6 +11,42 @@ export const getApi = async () => {
     "https://api.themoviedb.org/3/movie/popular?api_key=5e0b2f9c0f6a0f0f0f0f0f0f0f0f0f0f",
     options
   );
-  console.log(response.data.results);
+  console.log("Trending movies", response.data.results);
+  return response;
+};
+
+export const getMovieById = async (id) => {
+  const response = await axios.get(
+    "https://api.themoviedb.org/3/movie/${id}?language=en-US",
+    options
+  );
+  console.log("Movie details:", response.data);
+  return response;
+};
+
+export const getMovieByQuery = async (query) => {
+  const response = await axios.get(
+    "https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1",
+    options
+  );
+  console.log("Search movie by query:", response.data);
+  return response;
+};
+
+export const getMovieByCredits = async (id) => {
+  const response = await axios.get(
+    "https://api.themoviedb.org/3/movie/${id}/credits?language=en-US",
+    options
+  );
+  console.log("Movie credits:", response.data);
+  return response;
+};
+
+export const getMovieByReviews = async (id) => {
+  const response = await axios.get(
+    "https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US&page=1",
+    options
+  );
+  console.log("Movie reviews:", response.data);
   return response;
 };

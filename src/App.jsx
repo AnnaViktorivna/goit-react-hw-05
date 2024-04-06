@@ -20,9 +20,6 @@ function App() {
           <NavLink className={getActiveClassName} to='/'>
             Home
           </NavLink>
-          {/* <NavLink className={getActiveClassName} to='/details'>
-            Movie Details
-          </NavLink> */}
           <NavLink className={getActiveClassName} to='/movies'>
             Movies
           </NavLink>
