@@ -4,36 +4,41 @@ import MovieCast from "../components/MovieCast/MovieCast";
 import { MovieReviews } from "../components/MovieReviews/MovieReviews";
 import { getMovieById } from "../servises/api";
 
+const IMG = "https://image.tmdb.org/t/p/w500";
+
 export const MovieDetailsPage = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
+  console.log(movieId);
   const [movieDetail, setMovieDetail] = useState([]);
 
   useEffect(() => {
     async function getMovieDetails() {
       try {
-        const response = await getMovieById(id);
+        const response = await getMovieById(movieId);
         setMovieDetail(response.data);
       } catch (error) {
         console.log(error);
       }
     }
     getMovieDetails();
-  }, [id]);
+  }, [movieId]);
 
   return (
     <div>
-      <h1>Movie Details:{id}</h1>
-      <img
-        src='https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg
-'
-        alt=''
-      />
+      <h1>Movie Details:{movieId}</h1>
+      <img src={`${IMG}${movieDetail.poster_path}`} alt='' />
       <h2>{movieDetail.title}</h2>
       <p>User Score:{movieDetail.vote_average}</p>
       <h3>Owerview</h3>
       <p>{movieDetail.overview}</p>
-      <h3>Genres</h3>
-      <p>{movieDetail.genres}</p>
+
+      <ul>
+        <h3>Genres</h3>
+        {movieDetail.genres &&
+          movieDetail.genres.map((genre) => (
+            <li key={genre.id}>{genre.name}</li>
+          ))}
+      </ul>
       <h3>Additional information</h3>
       <MovieCast />
       <MovieReviews />

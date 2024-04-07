@@ -15,9 +15,9 @@ export const getApi = async () => {
   return response;
 };
 
-export const getMovieById = async (id) => {
+export const getMovieById = async (movieId) => {
   const response = await axios.get(
-    "https://api.themoviedb.org/3/movie/${id}?language=en-US",
+    `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=%D1%82%D1%82%D1%82%D1%82%D1%82&language=en-US`,
     options
   );
   console.log("Movie details:", response.data);
