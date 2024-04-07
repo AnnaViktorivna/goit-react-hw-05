@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 const MovieList = ({ movies }) => {
   return (
-    <div>
-      {" "}
-      <h1>Home</h1>
-      <h2>Popular movies today</h2>
-      <ul>
-        {movies.map((movie) => {
+    <ul>
+      {Array.isArray(movies) &&
+        movies.map((movie) => {
           return (
             <li key={movie.id}>
               <Link to={`/movies/${movie.id}`}>
@@ -19,8 +16,7 @@ const MovieList = ({ movies }) => {
             </li>
           );
         })}
-      </ul>
-    </div>
+    </ul>
   );
 };
 

@@ -21,6 +21,8 @@ export const HomePage = () => {
 
   return (
     <div>
+      <h1>Home</h1>
+      <h2>Popular movies today</h2>
       <MovieList movies={movies} />
     </div>
   );
