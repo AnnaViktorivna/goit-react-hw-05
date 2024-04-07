@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import MovieCast from "../components/MovieCast/MovieCast";
 import { MovieReviews } from "../components/MovieReviews/MovieReviews";
 import { getMovieById } from "../servises/api";
 
+import { Routes, Route } from "react-router-dom";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
 export const MovieDetailsPage = () => {
@@ -40,8 +41,12 @@ export const MovieDetailsPage = () => {
           ))}
       </ul>
       <h3>Additional information</h3>
-      <MovieCast />
-      <MovieReviews />
+      <Link to='cast'>Cast</Link>
+      <Link to='reviews'>Reviews</Link>
+      <Routes>
+        <Route path='cast' element={<MovieCast />} />
+        <Route path='reviews' element={<MovieReviews />} />
+      </Routes>
     </div>
   );
 };

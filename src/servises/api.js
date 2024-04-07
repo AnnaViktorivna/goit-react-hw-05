@@ -33,18 +33,18 @@ export const getMovieByQuery = async (query) => {
   return response;
 };
 
-export const getMovieByCredits = async (id) => {
+export const getMovieByCredits = async (movieId) => {
   const response = await axios.get(
-    "https://api.themoviedb.org/3/movie/${id}/credits?language=en-US",
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
     options
   );
   console.log("Movie credits:", response.data);
   return response;
 };
 
-export const getMovieByReviews = async (id) => {
+export const getMovieByReviews = async (movieId) => {
   const response = await axios.get(
-    "https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US&page=1",
+    `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`,
     options
   );
   console.log("Movie reviews:", response.data);
