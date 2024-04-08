@@ -5,7 +5,7 @@ import MovieList from "../components/MovieList/MovieList";
 
 // import { Link, useParams } from "react-router-dom";
 
-export const HomePage = () => {
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function getMovies() {
@@ -28,6 +28,7 @@ export const HomePage = () => {
   );
 };
 
+export default HomePage;
 // "page": 1,
 // "results": [
 //   {

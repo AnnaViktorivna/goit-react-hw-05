@@ -7,7 +7,7 @@ import { getMovieById } from "../servises/api";
 import { Routes, Route } from "react-router-dom";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
-export const MovieDetailsPage = () => {
+const MovieDetailsPage = () => {
   const { movieId } = useParams();
   console.log(movieId);
   const [movieDetail, setMovieDetail] = useState([]);
@@ -41,8 +41,12 @@ export const MovieDetailsPage = () => {
           ))}
       </ul>
       <h3>Additional information</h3>
-      <Link to='cast'>Cast</Link>
-      <Link to='reviews'>Reviews</Link>
+      <Link style={{ display: "flex" }} to='cast'>
+        Cast
+      </Link>
+      <Link style={{ display: "flex" }} to='reviews'>
+        Reviews
+      </Link>
       <Routes>
         <Route path='cast' element={<MovieCast />} />
         <Route path='reviews' element={<MovieReviews />} />
@@ -51,6 +55,7 @@ export const MovieDetailsPage = () => {
   );
 };
 
+export default MovieDetailsPage;
 // {
 //   "adult": false,
 //   "backdrop_path": "/hZkgoQYus5vegHoetLkCJzb17zJ.jpg",

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { getMovieByQuery } from "../servises/api";
 import { useState, useEffect } from "react";
 
-export const MoviesPage = () => {
+const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   useEffect(() => {
@@ -45,9 +45,11 @@ export const MoviesPage = () => {
         {movies.length > 0 ? (
           <MovieList movies={movies} />
         ) : (
-          <p>No movies found.</p>
+          <p>Please, enter your search query &#128579;</p>
         )}
       </div>
     </>
   );
 };
+
+export default MoviesPage;

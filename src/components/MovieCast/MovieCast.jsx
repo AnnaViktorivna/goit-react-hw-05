@@ -1,6 +1,7 @@
 import { getMovieByCredits } from "../../servises/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 const IMG = "https://image.tmdb.org/t/p/w500";
 const MovieCast = () => {
   const [movieCasts, setMovieCasts] = useState([]);
