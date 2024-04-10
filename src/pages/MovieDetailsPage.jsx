@@ -1,8 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import MovieCast from "../components/MovieCast/MovieCast";
 import { MovieReviews } from "../components/MovieReviews/MovieReviews";
 import { getMovieById } from "../servises/api";
+
+import { useLocation } from "react-router-dom";
 
 import { Routes, Route } from "react-router-dom";
 const IMG = "https://image.tmdb.org/t/p/w500";
@@ -11,7 +13,8 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   console.log(movieId);
   const [movieDetail, setMovieDetail] = useState([]);
-
+  const location = useLocation();
+  const backLinkRef = useRef(location.state ?? "/");
   useEffect(() => {
     async function getMovieDetails() {
       try {
@@ -26,6 +29,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
+      <Link to={backLinkRef.current}>Go back</Link>
       <h1>Movie Details:{movieId}</h1>
       <img src={`${IMG}${movieDetail.poster_path}`} alt='' />
       <h2>{movieDetail.title}</h2>

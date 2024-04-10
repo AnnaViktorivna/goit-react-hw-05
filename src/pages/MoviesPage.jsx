@@ -2,12 +2,16 @@ import MovieList from "../components/MovieList/MovieList";
 import { Formik, Form, Field } from "formik";
 import { getMovieByQuery } from "../servises/api";
 import { useState, useEffect } from "react";
-
+import { Link, useSearchParams } from "react-router-dom";
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query");
+
   useEffect(() => {
     async function getMovies() {
+      if (query === null) return;
       try {
         const response = await getMovieByQuery(query);
         console.log(response.data.results);
@@ -20,11 +24,12 @@ const MoviesPage = () => {
   }, [query]);
 
   const handleSubmit = (values) => {
-    setQuery(values.searchMovie);
+    setSearchParams({ query: values.searchMovie });
   };
 
   return (
     <>
+      <Link to='/'>Go Home</Link>
       <Formik initialValues={{ searchMovie: "" }} onSubmit={handleSubmit}>
         <Form>
           <h2>Search movie by name</h2>
